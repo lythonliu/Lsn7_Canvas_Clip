@@ -1,0 +1,70 @@
+Canvas
+
+直面意思是画布，其实是分装的一个工具类
+
+一个Canvas类对象有四大基本要素
+
+1、一个是用来保存像素的bitmap  -----  画板
+
+2、一个Canvas在Bitmap上进行绘制操作 ---- 画布或者画纸（Layer---saveLayer操作时，新建一个透明的画布图层）
+
+3、绘制的东西
+
+4、绘制的画笔Paint
+
+
+把我们的Canvas比喻成一块画板，为什么？
+
+今天的学习目标：
+
+1、了解Canvas可以用来画些什么东西
+
+	除了常用的形状之外
+	画Region --- 区域的意思，它表示的Canvas图层上的一块封闭的区域
+	
+	有以下几种方式：----具体含义 看图
+	DIFFERENCE(0),
+        INTERSECT(1),
+        UNION(2),
+        XOR(3),
+        REVERSE_DIFFERENCE(4),
+        REPLACE(5);
+
+
+2、Canvas的变换技巧----了解Canvas里面的坐标系
+
+	Canvas里面牵扯两种坐标系：Canvas自己的坐标系、绘图坐标系
+
+	Canvas的坐标系，
+
+		它就在View的左上角，做坐标原点往右是X轴正半轴，往下是Y轴的正半轴，有且只有一个，唯一不变
+
+	绘图坐标系
+
+		它不是唯一不变的，它与Canvas的Matrix有关系，当Matrix发生改变的时候，绘图坐标系对应的进行改变，
+		
+		同时这个过程是不可逆的（save和restore方法来保存和还原变化操作）
+
+		Matrix又是通过我们设置translate、rotate、scale、skew来进行改变的
+
+
+3、Canvas的状态保存---状态栈、Layer栈
+
+	状态栈--save、 restore方法来保存和还原变换操作Matrix以及Clip剪裁
+
+		也可以通过restoretoCount直接还原到对应栈的保存状态
+
+
+	Layer栈--- saveLayer的时候都会新建一个透明的图层（离屏Bitmap-离屏缓冲），并且会将saveLayer之前的一些Canvas操作延续过来
+		  后续的绘图操作都在新建的layer上面进行
+		  当我们调用restore 或者 restoreToCount 时 更新到对应的图层和画布上
+
+
+
+
+作业：1、实现ReavlView效果 --- 通过图片剪裁拼接（自定义Drawable实现）
+
+      2、自定义SearchView
+		
+		
+
